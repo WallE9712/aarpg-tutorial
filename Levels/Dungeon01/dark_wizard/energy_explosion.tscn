@@ -62,6 +62,6 @@ hframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_6u5py")
+&"": SubResource("AnimationLibrary_6u5py")
 }
 autoplay = "explode"

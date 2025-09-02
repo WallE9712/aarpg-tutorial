@@ -85,7 +85,7 @@ position = Vector2(36, 64)
 
 [node name="LevelTransition" parent="." instance=ExtResource("5_xj8mw")]
 position = Vector2(224, -64)
-level = "res://Levels/Area01/01.tscn"
+level = "uid://7egb2012ff3b"
 side = 2
 
 [node name="LevelTransition_Shop" parent="." instance=ExtResource("8_0j6pc")]
@@ -306,3 +306,7 @@ position = Vector2(181, 226)
 
 [node name="GrapplePost2" parent="." instance=ExtResource("31_s3up8")]
 position = Vector2(213, 378)
+
+[node name="LevelTransition2" parent="." instance=ExtResource("5_xj8mw")]
+position = Vector2(175, 63)
+level = "uid://2p13wtrmfvqv"

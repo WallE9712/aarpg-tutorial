@@ -228,7 +228,7 @@ speed = 400.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_sed1j")
+&"": SubResource("AnimationLibrary_sed1j")
 }
 autoplay = "default"
 

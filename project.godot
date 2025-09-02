@@ -38,6 +38,10 @@ window/size/window_width_override=1440
 window/size/window_height_override=810
 window/stretch/mode="viewport"
 
+[dotnet]
+
+project/assembly_name="AARPG Tutorial"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/michael_games_editor_plugins/plugin.cfg")
