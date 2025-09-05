@@ -311,4 +311,5 @@ position = Vector2(213, 378)
 [node name="LevelTransition2" parent="." instance=ExtResource("5_xj8mw")]
 position = Vector2(224, 222)
 level = "uid://5bk7frprctjc"
+target_transition_area = "LevelTransitionbacktofirst"
 side = 3

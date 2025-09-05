@@ -32,9 +32,9 @@ position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_k7a3r")
 
 [node name="LevelTransitionLap" parent="." instance=ExtResource("3_ggxwf")]
-position = Vector2(-66, 190)
+position = Vector2(-47, 190)
 level = "uid://b0ce24n7qrmp7"
+target_transition_area = "backtooffice"
 center_player = true
-side = 1
 
 [editable path="LevelTransitionbacktofirst"]

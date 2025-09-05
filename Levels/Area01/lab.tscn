@@ -15,7 +15,9 @@ tile_map_data = PackedByteArray("AAD9//7/AAAOAAUAAAD9////AAAOAAUAAAD9/wAAAAAOAAU
 position = Vector2(211, 177)
 
 [node name="backtooffice" parent="." instance=ExtResource("4_68j6p")]
-position = Vector2(512, 131)
+position = Vector2(482, 127)
 rotation = 0.00873372
 level = "uid://5bk7frprctjc"
+target_transition_area = "LevelTransitionLap"
 size = 3
+side = 1

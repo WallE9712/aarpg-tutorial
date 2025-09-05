@@ -130,7 +130,7 @@ shape = SubResource("RectangleShape2D_ybkkt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_qcgu1")
+&"": SubResource("AnimationLibrary_qcgu1")
 }
 autoplay = "default"
 
