@@ -22,4 +22,3 @@ func _update_direction( new_direction : Vector2 ) -> void:
 		_:
 			rotation_degrees = 0
 	pass
-

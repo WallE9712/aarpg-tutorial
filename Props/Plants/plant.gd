@@ -14,4 +14,3 @@ func take_damage( _damage : HurtBox ) -> void:
 	await animation_player.animation_finished
 	queue_free()
 	pass
-

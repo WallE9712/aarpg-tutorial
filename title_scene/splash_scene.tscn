@@ -170,7 +170,7 @@ vframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MichaelGamesLogo"]
 libraries = {
-"": SubResource("AnimationLibrary_vmley")
+&"": SubResource("AnimationLibrary_vmley")
 }
 autoplay = "Default"
 movie_quit_on_finish = true

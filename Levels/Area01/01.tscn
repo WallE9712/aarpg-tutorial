@@ -534,7 +534,7 @@ position = Vector2(254, 197)
 
 [node name="LevelTransition" parent="." instance=ExtResource("4_b5wk2")]
 position = Vector2(256, 320)
-level = "res://Levels/Area01/02.tscn"
+level = "uid://chcb2oelfl72f"
 side = 3
 
 [node name="LevelTransition2" parent="." instance=ExtResource("4_b5wk2")]
