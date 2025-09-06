@@ -4,7 +4,7 @@
 已为你的Godot项目添加了一个完整的时间系统，具有以下功能：
 
 ### 主要特性
-1. **实时时间显示** - 在游戏左上角显示当前游戏时间（格式：第X天 HH:MM）
+1. **实时时间显示** - 在游戏左上角显示当前游戏时间（格式：第X天 Xh Xmin）
 2. **快速时间流逝** - 5秒游戏时间 = 1分钟显示时间
 3. **暂停/恢复功能** - 按ESC键可以暂停和恢复时间
 4. **暂停指示器** - 暂停时显示暂停图标（⏸）
@@ -36,7 +36,7 @@ GUI/player_hud/
 # 获取当前时间（秒）
 var current_time = TimeManager.get_total_seconds()
 
-# 获取格式化时间字符串（格式：第X天 HH:MM）
+# 获取格式化时间字符串（格式：第X天 Xh Xmin）
 var time_string = TimeManager.get_formatted_time()
 
 # 获取时间组件
@@ -63,7 +63,7 @@ TimeManager.set_time_scale(12.0)
 TimeManager.time_updated.connect(_on_time_updated)
 
 func _on_time_updated(days: int, hours: int, minutes: int):
-    print("时间更新: 第%d天 %02d:%02d" % [days, hours, minutes])
+    print("时间更新: 第%d天 %dh %dmin" % [days, hours, minutes])
 
 # 监听暂停/恢复
 TimeManager.game_paused.connect(_on_game_paused)
@@ -95,7 +95,7 @@ time_display_instance.position = Vector2(20, 20)  # 修改坐标
 ### 修改时间格式
 在 `GUI/time_display/time_display.gd` 中修改：
 ```gdscript
-time_label.text = "第%d天 %02d:%02d" % [days, hours, minutes]
+time_label.text = "第%d天 %dh %dmin" % [days, hours, minutes]
 ```
 
 ### 修改暂停指示器
@@ -107,12 +107,12 @@ time_label.text = "第%d天 %02d:%02d" % [days, hours, minutes]
 3. 时间显示会自动与暂停菜单同步
 4. 所有时间相关功能都通过全局 `TimeManager` 访问
 5. **时间缩放**：5秒游戏时间 = 1分钟显示时间（time_scale = 12.0）
-6. **时间格式**：显示为"第X天 HH:MM"格式，适合长期游戏
+6. **时间格式**：显示为"第X天 Xh Xmin"格式，适合长期游戏
 
 ## 测试建议
-1. 启动游戏，确认时间显示在左上角（格式：第0天 00:00）
-2. 等待5秒，确认时间显示为"第0天 00:01"
-3. 等待5分钟（300秒），确认时间显示为"第0天 01:00"
+1. 启动游戏，确认时间显示在左上角（格式：第0天 0h 0min）
+2. 等待5秒，确认时间显示为"第0天 0h 1min"
+3. 等待5分钟（300秒），确认时间显示为"第0天 1h 0min"
 4. 按ESC键暂停，确认时间停止并显示暂停图标
 5. 关闭暂停菜单，确认时间恢复
 6. 在不同场景间切换，确认时间持续计算

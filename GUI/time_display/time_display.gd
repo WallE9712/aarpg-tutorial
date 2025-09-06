@@ -23,7 +23,12 @@ func _ready() -> void:
 
 func _on_time_updated(days: int, hours: int, minutes: int) -> void:
 	if is_visible:
-		time_label.text = "第%d天 %02d h%02d min" % [days, hours, minutes]
+		var time_text = "第%d天" % days
+		
+		time_text += " %dh" % hours
+		time_text += " %dmin" % minutes
+		
+		time_label.text = time_text
 
 func _on_game_paused() -> void:
 	pause_indicator.visible = true

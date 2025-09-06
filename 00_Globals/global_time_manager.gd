@@ -57,7 +57,18 @@ func reset_time() -> void:
 	time_updated.emit(days, hours, minutes)
 
 func get_formatted_time() -> String:
-	return "第%d天 %02d:%02d" % [days, hours, minutes]
+	var time_text = "第%d天" % days
+	
+	if hours > 0:
+		time_text += " %dh" % hours
+	if minutes > 0:
+		time_text += " %dmin" % minutes
+	
+	# 如果只有天数，显示完整格式
+	if hours == 0 and minutes == 0:
+		time_text += " 0h 0min"
+	
+	return time_text
 
 func get_total_seconds() -> int:
 	return int(game_time)
