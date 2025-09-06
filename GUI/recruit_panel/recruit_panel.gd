@@ -58,27 +58,41 @@ func close_panel() -> void:
 	print("学生招募面板已关闭")
 
 func _create_student_cards() -> void:
-	print("开始创建学生卡片...")
-	# 清除现有卡片
-	for card in student_cards:
-		if is_instance_valid(card):
-			card.queue_free()
-	student_cards.clear()
+	print("开始设置学生卡片...")
 	
-	# 创建4个学生卡片
+	# 获取场景中预设的卡片
+	var preset_cards = [
+		$PanelContainer/VBoxContainer/CardsContainer/StudentCard1,
+		$PanelContainer/VBoxContainer/CardsContainer/StudentCard2,
+		$PanelContainer/VBoxContainer/CardsContainer/StudentCard3,
+		$PanelContainer/VBoxContainer/CardsContainer/StudentCard4
+	]
+	
+	# 设置HBoxContainer的布局属性，确保均衡分布
+	var cards_container = $PanelContainer/VBoxContainer/CardsContainer
+	cards_container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	cards_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	cards_container.alignment = BoxContainer.ALIGNMENT_CENTER
+	
+	# 为每个预设卡片添加学生卡片实例
 	for i in range(4):
-		print("创建第 ", i+1, " 个学生卡片")
+		print("设置第 ", i+1, " 个学生卡片")
 		var card_instance = student_card_scene.instantiate()
-		cards_container.add_child(card_instance)
+		preset_cards[i].add_child(card_instance)
 		student_cards.append(card_instance)
-		print("卡片已添加到容器，卡片可见性: ", card_instance.visible)
+		
+		# 设置每个卡片的布局属性，确保均衡分布
+		preset_cards[i].size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		preset_cards[i].custom_minimum_size = Vector2(80, 200)
+		
+		print("卡片已添加到预设位置，卡片可见性: ", card_instance.visible)
 		
 		# 连接招募信号
 		card_instance.student_recruited.connect(_on_student_card_recruited)
 	
 	# 立即生成学生数据并设置到卡片
 	_refresh_student_cards()
-	print("学生卡片创建完成")
+	print("学生卡片设置完成")
 
 func _refresh_student_cards() -> void:
 	# 直接生成4个学生数据，不依赖StudentDataManager

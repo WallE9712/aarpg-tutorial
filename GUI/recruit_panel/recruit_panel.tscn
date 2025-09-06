@@ -23,7 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.7)
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." groups=["new_group", "tilemaps"]]
 layout_mode = 0
 offset_right = 480.0
 offset_bottom = 270.0
@@ -47,15 +47,19 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="StudentCard1" type="Control" parent="PanelContainer/VBoxContainer/CardsContainer"]
+custom_minimum_size = Vector2(80, 200)
 layout_mode = 2
 
 [node name="StudentCard2" type="Control" parent="PanelContainer/VBoxContainer/CardsContainer"]
+custom_minimum_size = Vector2(80, 200)
 layout_mode = 2
 
 [node name="StudentCard3" type="Control" parent="PanelContainer/VBoxContainer/CardsContainer"]
+custom_minimum_size = Vector2(80, 200)
 layout_mode = 2
 
 [node name="StudentCard4" type="Control" parent="PanelContainer/VBoxContainer/CardsContainer"]
+custom_minimum_size = Vector2(80, 200)
 layout_mode = 2
 
 [node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer"]
