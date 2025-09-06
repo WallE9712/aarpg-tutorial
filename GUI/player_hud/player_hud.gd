@@ -24,6 +24,10 @@ var hearts : Array[ HeartGUI ] = []
 
 @onready var notification_ui : NotificationUI = $Control/Notification
 
+# 时间显示
+var time_display_scene = preload("res://GUI/time_display/time_display.tscn")
+var time_display_instance
+
 
 
 
@@ -45,6 +49,9 @@ func _ready():
 	update_ability_ui( 0 )
 	PauseMenu.shown.connect( _on_show_pause )
 	PauseMenu.hidden.connect( _on_hide_pause )
+	
+	# 创建时间显示
+	_create_time_display()
 	pass
 
 
@@ -189,3 +196,9 @@ func _on_show_pause() -> void:
 func _on_hide_pause() -> void:
 	abilities.visible = true
 	pass
+
+func _create_time_display() -> void:
+	time_display_instance = time_display_scene.instantiate()
+	$Control.add_child(time_display_instance)
+	# 设置时间显示位置到左上角
+	time_display_instance.position = Vector2(20, 20)
