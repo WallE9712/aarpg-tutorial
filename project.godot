@@ -30,6 +30,7 @@ QuestManager="*res://quests/scripts/global_quest_manager.gd"
 EffectManager="*res://00_Globals/global_effect_manager.gd"
 ShopMenu="*res://GUI/shop_menu/shop_menu.tscn"
 TimeManager="*res://00_Globals/global_time_manager.gd"
+DataManager="*res://00_Globals/global_data_manager.gd"
 
 [display]
 

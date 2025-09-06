@@ -28,6 +28,10 @@ var hearts : Array[ HeartGUI ] = []
 var time_display_scene = preload("res://GUI/time_display/time_display.tscn")
 var time_display_instance
 
+# 数据显示
+var data_display_scene = preload("res://GUI/data_display/data_display.tscn")
+var data_display_instance
+
 
 
 
@@ -52,6 +56,9 @@ func _ready():
 	
 	# 创建时间显示
 	_create_time_display()
+	
+	# 创建数据显示
+	_create_data_display()
 	pass
 
 
@@ -202,3 +209,9 @@ func _create_time_display() -> void:
 	$Control.add_child(time_display_instance)
 	# 设置时间显示位置到左上角
 	time_display_instance.position = Vector2(20, 20)
+
+func _create_data_display() -> void:
+	data_display_instance = data_display_scene.instantiate()
+	$Control.add_child(data_display_instance)
+	# 设置数据显示位置到屏幕最上方中间
+	data_display_instance.position = Vector2(65, 10)
