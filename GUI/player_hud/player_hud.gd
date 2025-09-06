@@ -32,6 +32,14 @@ var time_display_instance
 var data_display_scene = preload("res://GUI/data_display/data_display.tscn")
 var data_display_instance
 
+# 招募面板
+var recruit_panel_scene = preload("res://GUI/recruit_panel/recruit_panel.tscn")
+var recruit_panel_instance
+
+# 简单测试面板
+var simple_test_scene = preload("res://GUI/recruit_panel/simple_test_panel.gd")
+var simple_test_instance
+
 
 
 
@@ -59,6 +67,12 @@ func _ready():
 	
 	# 创建数据显示
 	_create_data_display()
+	
+	# 创建招募面板
+	_create_recruit_panel()
+	
+	# 创建简单测试面板
+	_create_simple_test_panel()
 	pass
 
 
@@ -215,3 +229,14 @@ func _create_data_display() -> void:
 	$Control.add_child(data_display_instance)
 	# 设置数据显示位置到屏幕最上方中间
 	data_display_instance.position = Vector2(65, 10)
+
+func _create_recruit_panel() -> void:
+	recruit_panel_instance = recruit_panel_scene.instantiate()
+	$Control.add_child(recruit_panel_instance)
+	# 招募面板默认隐藏，通过O键控制显示
+
+func _create_simple_test_panel() -> void:
+	simple_test_instance = simple_test_scene.new()
+	$Control.add_child(simple_test_instance)
+	# 简单测试面板默认隐藏
+	simple_test_instance.visible = false
