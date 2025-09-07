@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8yay203a4b5d"]
+
+[ext_resource type="Script" path="res://GUI/paper_management/paper_management_panel.gd" id="1_0x8y9"]
+
+[sub_resource type="Theme" id="Theme_1x2y3"]
+default_font_size = 16
+
+[node name="PaperManagementPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0x8y9")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+
+[node name="PanelContainer" type="PanelContainer" parent="." groups=["new_group", "tilemaps"]]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 270.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_1x2y3")
+text = "论文管理面板"
+horizontal_alignment = 1
+
+[node name="StatsContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="AcceptedPapersLabel" type="Label" parent="PanelContainer/VBoxContainer/StatsContainer"]
+layout_mode = 2
+theme = SubResource("Theme_1x2y3")
+text = "已录用论文: 0 篇"
+horizontal_alignment = 1
+
+[node name="CurrentTitleLabel" type="Label" parent="PanelContainer/VBoxContainer/StatsContainer"]
+layout_mode = 2
+theme = SubResource("Theme_1x2y3")
+text = "当前职称: 研究生"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PaperListContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+
+[node name="PaperList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PaperListContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SubmitButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "投递选中论文"
+disabled = true
+
+[node name="InfoLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_1x2y3")
+text = "按P键关闭面板 | 点击论文查看详情"
+horizontal_alignment = 1

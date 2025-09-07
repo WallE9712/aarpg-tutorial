@@ -24,6 +24,9 @@ var title_levels: Array[String] = [
 	"院士"
 ]
 
+# 通用数据存储
+var data_storage: Dictionary = {}
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	# 初始化数据
@@ -95,3 +98,20 @@ func get_formatted_data() -> String:
 func reset_data() -> void:
 	update_graduate_count(0)
 	update_title("研究生")
+	data_storage.clear()
+
+# 通用数据管理方法
+func set_data(key: String, value) -> void:
+	data_storage[key] = value
+	data_updated.emit(key, value)
+
+func get_data(key: String, default_value = null):
+	return data_storage.get(key, default_value)
+
+func has_data(key: String) -> bool:
+	return data_storage.has(key)
+
+func remove_data(key: String) -> void:
+	if data_storage.has(key):
+		data_storage.erase(key)
+		data_updated.emit(key, null)

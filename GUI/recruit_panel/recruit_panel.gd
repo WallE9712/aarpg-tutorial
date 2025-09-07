@@ -5,6 +5,7 @@ extends Control
 
 signal panel_opened
 signal panel_closed
+signal student_recruited(student_data: Dictionary)
 
 @onready var cards_container: HBoxContainer = $PanelContainer/VBoxContainer/CardsContainer
 @onready var student_card_scene = preload("res://GUI/recruit_panel/student_card.tscn")
@@ -147,6 +148,12 @@ func _on_student_card_recruited(student_data: Dictionary) -> void:
 		DataManager.add_graduate(1)
 		print("研究生数量增加1，当前数量: ", DataManager.graduate_count)
 	
+	# 将学生添加到学生管理系统中
+	_add_student_to_management_system(student_data)
+	
+	# 发送学生招募信号
+	student_recruited.emit(student_data)
+	
 	# 禁用被招募的卡片
 	for card in student_cards:
 		if card.student_data == student_data:
@@ -156,3 +163,136 @@ func _on_student_card_recruited(student_data: Dictionary) -> void:
 			break
 	
 	print("学生招募成功: ", student_data.get("name", "未知"))
+
+func _add_student_to_management_system(student_data: Dictionary) -> void:
+	# 创建学生管理数据
+	var managed_student = student_data.duplicate()
+	
+	# 添加管理相关属性
+	managed_student["recruited_days"] = 0
+	managed_student["recruited_date"] = Time.get_datetime_string_from_system()
+	managed_student["papers_produced"] = 0
+	managed_student["research_speed"] = _calculate_research_speed(managed_student)
+	managed_student["research_progress"] = 0.0
+	managed_student["current_paper"] = _generate_new_paper_topic(managed_student)
+	managed_student["last_production_time"] = Time.get_unix_time_from_system()
+	
+	# 通知学生管理面板更新
+	_notify_student_management_system(managed_student)
+
+func _calculate_research_speed(student: Dictionary) -> float:
+	# 根据学生属性计算研究速度（每分钟进度百分比）
+	var base_speed = 600.0  # 基础研究速度（每分钟600%，10秒完成一篇）
+	
+	# GPA影响
+	var gpa_bonus = (student["gpa"] - 2.0) / 2.0 * 150.0  # GPA越高研究越快
+	
+	# 潜力影响
+	var potential_multiplier = 1.0
+	match student["potential"]:
+		"高":
+			potential_multiplier = 1.5  # 高潜力：6-7秒完成
+		"中":
+			potential_multiplier = 1.0  # 中等潜力：10秒完成
+		"低":
+			potential_multiplier = 0.7  # 低潜力：14秒完成
+	
+	# 性格影响
+	var personality_bonus = 0.0
+	match student["personality"]:
+		"勤奋":
+			personality_bonus = 240.0  # 勤奋：6秒完成
+		"创新":
+			personality_bonus = 150.0  # 创新：8秒完成
+		"严谨":
+			personality_bonus = 60.0   # 严谨：12秒完成
+		"合作":
+			personality_bonus = 120.0  # 合作：9秒完成
+		"独立":
+			personality_bonus = 90.0   # 独立：10秒完成
+	
+	# 健康影响
+	var health_multiplier = 1.0
+	match student["health"]:
+		"优秀":
+			health_multiplier = 1.2  # 优秀：8秒完成
+		"良好":
+			health_multiplier = 1.0  # 良好：10秒完成
+		"一般":
+			health_multiplier = 0.8  # 一般：12秒完成
+	
+	var final_speed = (base_speed + gpa_bonus + personality_bonus) * potential_multiplier * health_multiplier
+	return round(final_speed * 10) / 10.0  # 保留一位小数
+
+func _generate_new_paper_topic(student: Dictionary) -> Dictionary:
+	# 根据学生专业生成论文主题
+	var paper = {}
+	
+	# 论文标题库（按专业分类）
+	var paper_titles = {
+		"计算机科学": [
+			"基于深度学习的图像识别算法研究",
+			"分布式系统性能优化策略",
+			"计算机视觉在医疗诊断中的应用",
+			"区块链技术在数据安全中的应用",
+			"云计算环境下的资源调度算法"
+		],
+		"软件工程": [
+			"敏捷开发方法在大型项目中的应用",
+			"软件测试自动化框架设计",
+			"微服务架构的性能优化研究",
+			"代码质量评估模型构建",
+			"软件项目管理工具开发"
+		],
+		"人工智能": [
+			"机器学习算法在自然语言处理中的应用",
+			"强化学习在游戏AI中的实现",
+			"神经网络模型压缩技术研究",
+			"人工智能伦理问题探讨",
+			"智能推荐系统算法优化"
+		],
+		"数据科学": [
+			"大数据处理框架性能分析",
+			"数据挖掘算法在商业智能中的应用",
+			"时间序列数据预测模型研究",
+			"数据可视化技术发展",
+			"机器学习在数据清洗中的应用"
+		],
+		"网络安全": [
+			"网络入侵检测系统设计",
+			"密码学算法安全性分析",
+			"网络安全风险评估模型",
+			"区块链安全机制研究",
+			"网络攻击防护策略"
+		]
+	}
+	
+	var major = student.get("major", "计算机科学")
+	var titles = paper_titles.get(major, paper_titles["计算机科学"])
+	
+	# 期刊/会议名称
+	var venues = [
+		"IEEE Transactions on Pattern Analysis",
+		"ACM Computing Surveys",
+		"Nature Machine Intelligence",
+		"Journal of Machine Learning Research",
+		"International Conference on Machine Learning",
+		"Conference on Computer Vision and Pattern Recognition",
+		"Neural Information Processing Systems",
+		"International Conference on Learning Representations",
+		"Association for Computational Linguistics",
+		"ACM Transactions on Graphics"
+	]
+	
+	# 生成论文信息
+	paper["id"] = Time.get_unix_time_from_system()  # 使用时间戳作为ID
+	paper["title"] = titles[randi() % titles.size()]
+	paper["venue"] = venues[randi() % venues.size()]
+	paper["research_progress"] = 0.0
+	
+	return paper
+
+func _notify_student_management_system(student_data: Dictionary) -> void:
+	# 通过全局信号通知学生管理面板
+	# 这里可以使用全局信号系统或者直接访问学生管理面板
+	print("通知学生管理面板添加新学生: ", student_data["name"])

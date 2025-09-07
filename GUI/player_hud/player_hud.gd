@@ -40,6 +40,14 @@ var recruit_panel_instance
 var simple_test_scene = preload("res://GUI/recruit_panel/simple_test_panel.gd")
 var simple_test_instance
 
+# 论文管理面板
+var paper_management_scene = preload("res://GUI/paper_management/paper_management_panel.tscn")
+var paper_management_instance
+
+# 学生管理面板
+var student_management_scene = preload("res://GUI/student_management/student_management_panel.tscn")
+var student_management_instance
+
 
 
 
@@ -73,6 +81,15 @@ func _ready():
 	
 	# 创建简单测试面板
 	_create_simple_test_panel()
+	
+	# 创建论文管理面板
+	_create_paper_management_panel()
+	
+	# 创建学生管理面板
+	_create_student_management_panel()
+	
+	# 连接所有面板之间的信号
+	_connect_panel_signals()
 	pass
 
 
@@ -240,3 +257,41 @@ func _create_simple_test_panel() -> void:
 	$Control.add_child(simple_test_instance)
 	# 简单测试面板默认隐藏
 	simple_test_instance.visible = false
+
+func _create_paper_management_panel() -> void:
+	paper_management_instance = paper_management_scene.instantiate()
+	$Control.add_child(paper_management_instance)
+	# 论文管理面板默认隐藏，通过P键控制显示
+
+func _create_student_management_panel() -> void:
+	student_management_instance = student_management_scene.instantiate()
+	$Control.add_child(student_management_instance)
+	# 学生管理面板默认隐藏，通过S键控制显示
+
+func _on_student_recruited(student_data: Dictionary) -> void:
+	# 当学生被招募时，通知学生管理面板
+	print("收到学生招募信号: ", student_data.get("name", "未知"))
+	if student_management_instance:
+		student_management_instance.add_recruited_student(student_data)
+		print("已通知学生管理面板")
+	else:
+		print("错误：学生管理面板实例不存在")
+
+func _on_paper_produced(paper_data: Dictionary) -> void:
+	# 当学生产出论文时，通知论文管理面板
+	if paper_management_instance:
+		paper_management_instance.add_paper(paper_data)
+
+func _connect_panel_signals() -> void:
+	# 连接所有面板之间的信号
+	print("连接面板信号...")
+	
+	# 连接招募面板到学生管理面板
+	if recruit_panel_instance and student_management_instance:
+		recruit_panel_instance.student_recruited.connect(_on_student_recruited)
+		print("已连接招募面板到学生管理面板")
+	
+	# 连接学生管理面板到论文管理面板
+	if student_management_instance and paper_management_instance:
+		student_management_instance.paper_produced.connect(_on_paper_produced)
+		print("已连接学生管理面板到论文管理面板")
