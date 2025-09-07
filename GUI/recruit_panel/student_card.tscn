@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://nminptnw3ce4" path="res://GUI/recruit_panel/student_card.gd" id="1_0x8y9"]
 
 [sub_resource type="Theme" id="Theme_1x2y3"]
-default_font_size = 8
+default_font_size = 14
 
 [node name="StudentCard" type="Button"]
 custom_minimum_size = Vector2(80, 200)
@@ -21,28 +21,31 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.2, 0.3, 0.5, 0.9)
+color = Color(0.1, 0.2, 0.35, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = -1
 
 [node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_1x2y3")
 text = "姓名: 张三"
 horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -51,43 +54,60 @@ layout_mode = 2
 layout_mode = 2
 theme = SubResource("Theme_1x2y3")
 text = "年龄: 22"
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="GenderLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_1x2y3")
 text = "性别: 男"
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="GpaLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_1x2y3")
 text = "GPA: 3.8"
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="MajorLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_1x2y3")
 text = "专业: 计算机科学"
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="PapersLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_1x2y3")
 text = "论文: 2篇"
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="PotentialLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_1x2y3")
 text = "潜力: 高"
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="HealthLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_1x2y3")
 text = "健康: 良好"
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="PersonalityLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_1x2y3")
 text = "性格: 勤奋"
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="RecruitButton" type="Button" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
+layout_direction = 1
 layout_mode = 2
+theme = SubResource("Theme_1x2y3")
 text = "招募"

@@ -176,6 +176,7 @@ autoplay = "Default"
 movie_quit_on_finish = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MichaelGamesLogo"]
+volume_db = -28.642
 
 [node name="TextureRect" type="TextureRect" parent="."]
 modulate = Color(0.65098, 0.176471, 0.290196, 1)

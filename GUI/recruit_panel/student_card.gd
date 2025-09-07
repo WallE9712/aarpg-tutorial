@@ -27,6 +27,9 @@ func _ready() -> void:
 	# 设置按钮样式
 	_setup_button_style()
 	
+	# 设置字体样式
+	_setup_font_style()
+	
 	# 测试显示
 	name_label.text = "测试学生"
 	print("学生卡片初始化完成，可见性: ", visible)
@@ -52,8 +55,26 @@ func setup_student(student_info: Dictionary) -> void:
 	_set_potential_color(student_info.get("potential", "中等"))
 
 func _setup_button_style() -> void:
-	# 简化的按钮样式设置
-	pass
+	# 设置招募按钮的字体样式
+	if recruit_button:
+		recruit_button.add_theme_font_size_override("font_size", 12)
+		recruit_button.add_theme_color_override("font_color", Color.WHITE)
+		recruit_button.add_theme_color_override("font_outline_color", Color(0, 0, 0, 1))
+		recruit_button.add_theme_constant_override("outline_size", 1)
+		recruit_button.custom_minimum_size= Vector2(80,20)
+
+func _setup_font_style() -> void:
+	# 确保所有标签都使用正确的字体设置
+	var labels = [name_label, age_label, gender_label, gpa_label, major_label, 
+				  papers_label, potential_label, health_label, personality_label]
+	
+	for label in labels:
+		if label:
+			# 设置字体大小和颜色 - 增强清晰度
+			label.add_theme_font_size_override("font_size", 12)
+			label.add_theme_color_override("font_color", Color.WHITE)
+			label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 1))
+			label.add_theme_constant_override("outline_size", 2)
 
 func _set_potential_color(potential: String) -> void:
 	var color = Color.WHITE

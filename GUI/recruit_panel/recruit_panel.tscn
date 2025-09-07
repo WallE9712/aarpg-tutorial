@@ -30,6 +30,7 @@ offset_bottom = 270.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
+theme_override_constants/separation = -2
 
 [node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -44,22 +45,22 @@ layout_mode = 2
 custom_minimum_size = Vector2(400, 200)
 layout_direction = 2
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 0
 
 [node name="StudentCard1" type="Control" parent="PanelContainer/VBoxContainer/CardsContainer"]
-custom_minimum_size = Vector2(80, 200)
+custom_minimum_size = Vector2(120, 200)
 layout_mode = 2
 
 [node name="StudentCard2" type="Control" parent="PanelContainer/VBoxContainer/CardsContainer"]
-custom_minimum_size = Vector2(80, 200)
+custom_minimum_size = Vector2(120, 200)
 layout_mode = 2
 
 [node name="StudentCard3" type="Control" parent="PanelContainer/VBoxContainer/CardsContainer"]
-custom_minimum_size = Vector2(80, 200)
+custom_minimum_size = Vector2(120, 200)
 layout_mode = 2
 
 [node name="StudentCard4" type="Control" parent="PanelContainer/VBoxContainer/CardsContainer"]
-custom_minimum_size = Vector2(80, 200)
+custom_minimum_size = Vector2(120, 200)
 layout_mode = 2
 
 [node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer"]
